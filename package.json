@@ -19,7 +19,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"prepublish": "rm -rf build/cache"
 	},
 	"dependencies": {
 		"colors": "^1.4.0",
