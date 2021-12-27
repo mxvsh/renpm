@@ -12,22 +12,14 @@ const ProjectItem = ({ title, description }) => (
 	</Box>
 );
 
-function Sidebar() {
+function Sidebar({ packages = [], onChange }) {
 	return (
 		<Stack spacing={4} userSelect={'none'}>
-			<ProjectItem
-				title={'botmate'}
-				description={
-					'TypeScript-first schema validation with static type inference.'
-				}
-			/>
-			<Divider />
-			<ProjectItem
-				title={'zod'}
-				description={
-					'TypeScript-first schema validation with static type inference.'
-				}
-			/>
+			{packages.map((pkg, idx) => (
+				<div key={idx} onClick={() => onChange(pkg)}>
+					<ProjectItem title={pkg.name} description={pkg.description} />
+				</div>
+			))}
 		</Stack>
 	);
 }

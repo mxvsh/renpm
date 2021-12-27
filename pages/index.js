@@ -8,17 +8,21 @@ import {
 	HStack,
 	Spacer,
 	Stack,
+	Tag,
 	Text,
 } from '@chakra-ui/react';
 
 // components
 import Sidebar from '../components/sidebar';
 import Scripts from '../components/scripts';
-import Packages from '../components/packages';
+import Dependencies from '../components/dependencies';
+import { useState } from 'react';
 
 const packageJson = require('../package.json');
 
-export default function Home({ version }) {
+export default function Home({ version, packages }) {
+	const [active, setActive] = useState(null);
+
 	return (
 		<>
 			<Head>
@@ -35,19 +39,31 @@ export default function Home({ version }) {
 
 				<Flex>
 					<Box w='sm'>
-						<Sidebar />
+						<Sidebar onChange={setActive} packages={packages} />
 					</Box>
 					<Box ml={20} w='full'>
-						<HStack>
-							<Heading size='lg'>botmate</Heading>
-							<Spacer />
-							<Text>v1.3.4</Text>
-						</HStack>
-						<Divider my={4} />
-						<Stack>
-							<Scripts />
-							<Packages />
-						</Stack>
+						{active ? (
+							<>
+								<HStack>
+									<Heading size='lg'>{active.name}</Heading>
+									<Spacer />
+									<Tag>v{active.version}</Tag>
+								</HStack>
+								<Text>{active.description}</Text>
+								<Divider my={4} />
+								<Stack>
+									<Scripts scripts={active.scripts || {}} />
+									<Dependencies
+										deps={active.dependencies || {}}
+										devDeps={active.devDependencies || {}}
+									/>
+								</Stack>
+							</>
+						) : (
+							<>
+								<Heading textAlign={'center'}>Select a package</Heading>
+							</>
+						)}
 					</Box>
 				</Flex>
 			</Stack>
@@ -56,9 +72,11 @@ export default function Home({ version }) {
 }
 
 export const getServerSideProps = async () => {
+	const config = require('../providers/config');
 	return {
 		props: {
 			version: packageJson.version,
+			packages: config.get('packages'),
 		},
 	};
 };
