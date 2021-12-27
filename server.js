@@ -1,11 +1,11 @@
 const express = require('express');
 const next = require('next');
 
-const dev = process.env.NODE_ENV !== 'production';
+const dev = process.env.NODE_ENV === 'development';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-function main() {
+function main(PORT) {
 	app
 		.prepare()
 		.then(() => {
@@ -15,9 +15,9 @@ function main() {
 				return handle(req, res);
 			});
 
-			server.listen(3000, (err) => {
+			server.listen(PORT, (err) => {
 				if (err) throw err;
-				console.log('> Ready on http://localhost:3000');
+				console.log('> Ready on http://localhost:' + PORT);
 			});
 		})
 		.catch((ex) => {
@@ -26,8 +26,4 @@ function main() {
 		});
 }
 
-if (dev) {
-	main();
-}
-
-module.exports = { main };
+main(2240);
