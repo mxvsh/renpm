@@ -18,7 +18,13 @@ function Scripts({ scripts }) {
 			<Stack userSelect={'none'}>
 				{scriptKeys.map((key, index) => (
 					<>
-						<HStack key={index}>
+						<HStack
+							key={index}
+							transition={'all 0.2s'}
+							_hover={{
+								transform: 'translateX(2px)',
+							}}
+						>
 							<Box fontSize={'sm'}>
 								<Text fontWeight={'semibold'}>{key}</Text>
 								<Text>{scripts[key]}</Text>
