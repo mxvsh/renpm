@@ -5,7 +5,7 @@ import Card from './ui/card';
 
 function Scripts() {
 	return (
-		<Card title='Scripts'>
+		<Card title='Scripts' subTitle='Execute scripts from the package'>
 			<HStack>
 				<Box>
 					<Text fontWeight={'semibold'}>dev</Text>

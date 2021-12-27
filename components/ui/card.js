@@ -1,12 +1,15 @@
 import React from 'react';
-import { Box, Divider, Heading, Stack } from '@chakra-ui/react';
+import { Box, Divider, Heading, Stack, Text } from '@chakra-ui/react';
 
-function Card({ children, title }) {
+function Card({ children, title, subTitle }) {
 	return (
 		<Box px={4} py={3} bg='gray.100' rounded='md'>
 			<Heading size='md'>{title}</Heading>
+			<Text fontSize={'sm'} color='gray.500'>
+				{subTitle}
+			</Text>
 			<Divider my={4} />
-			<Stack maxW='96'>{children}</Stack>
+			<Stack px={2}>{children}</Stack>
 		</Box>
 	);
 }

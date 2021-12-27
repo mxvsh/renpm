@@ -2,6 +2,7 @@ import Head from 'next/head';
 import {
 	Box,
 	chakra,
+	Divider,
 	Flex,
 	Heading,
 	HStack,
@@ -15,7 +16,9 @@ import Sidebar from '../components/sidebar';
 import Scripts from '../components/scripts';
 import Packages from '../components/packages';
 
-export default function Home() {
+const packageJson = require('../package.json');
+
+export default function Home({ version }) {
 	return (
 		<>
 			<Head>
@@ -23,26 +26,39 @@ export default function Home() {
 			</Head>
 
 			<Stack px={2} maxW='5xl' m='0 auto' mt={12}>
-				<Heading mb={4} color='gray.600'>
-					<chakra.span color={'red.400'}>re</chakra.span>npm
-				</Heading>
+				<Box>
+					<Heading color='gray.600'>
+						<chakra.span color={'red.400'}>re</chakra.span>npm
+					</Heading>
+					<Text mb={4}>v{version}</Text>
+				</Box>
 
 				<Flex>
 					<Box w='sm'>
 						<Sidebar />
 					</Box>
-					<Stack ml={20} w='full'>
-						<HStack mb={6}>
+					<Box ml={20} w='full'>
+						<HStack>
 							<Heading size='lg'>botmate</Heading>
 							<Spacer />
 							<Text>v1.3.4</Text>
 						</HStack>
-
-						<Scripts />
-						<Packages />
-					</Stack>
+						<Divider my={4} />
+						<Stack>
+							<Scripts />
+							<Packages />
+						</Stack>
+					</Box>
 				</Flex>
 			</Stack>
 		</>
 	);
 }
+
+export const getServerSideProps = async () => {
+	return {
+		props: {
+			version: packageJson.version,
+		},
+	};
+};
