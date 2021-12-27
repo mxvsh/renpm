@@ -1,7 +1,7 @@
 {
 	"name": "renpm",
 	"description": "remote npm script execution",
-	"version": "0.0.1-alpha.1",
+	"version": "0.0.1-alpha.2",
 	"license": "MIT",
 	"bin": {
 		"renpm": "bin/cli.js"
@@ -33,11 +33,11 @@
 		"react-icons": "^4.3.1"
 	},
 	"devDependencies": {
-		"eslint": "8.5.0",
-		"eslint-config-next": "12.0.7",
 		"@chakra-ui/react": "^1.7.3",
 		"@emotion/react": "^11",
 		"@emotion/styled": "^11",
-		"@fontsource/montserrat": "^4.5.1"
+		"@fontsource/montserrat": "^4.5.1",
+		"eslint": "8.5.0",
+		"eslint-config-next": "12.0.7"
 	}
 }
