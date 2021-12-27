@@ -11,6 +11,7 @@
 		"lib",
 		"providers",
 		"build",
+		"server.js",
 		"next.config.js",
 		"README.md"
 	],
