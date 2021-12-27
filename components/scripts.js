@@ -20,6 +20,7 @@ function Scripts({ scripts }) {
 					<>
 						<HStack
 							key={index}
+							willChange={''}
 							transition={'all 0.2s'}
 							_hover={{
 								transform: 'translateX(2px)',
