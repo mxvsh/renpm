@@ -29,21 +29,22 @@ export default function Home({ version, packages }) {
 				<title>renpm - remote npm script</title>
 			</Head>
 
-			<Stack px={2} maxW='5xl' m='0 auto' mt={12}>
-				<Box>
-					<Heading color='gray.600'>
-						<chakra.span color={'red.400'}>re</chakra.span>npm
-					</Heading>
-					<Text mb={4}>v{version}</Text>
-				</Box>
-
+			<Stack h='100vh' overflow={'hidden'} px={2} maxW='5xl' m='0 auto'>
 				<Flex>
-					<Box w='sm'>
-						<Sidebar onChange={setActive} packages={packages} />
+					<Box pt={12}>
+						<Box>
+							<Heading color='gray.600'>
+								<chakra.span color={'red.400'}>re</chakra.span>npm
+							</Heading>
+							<Text mb={4}>v{version}</Text>
+						</Box>
+						<Box w='sm'>
+							<Sidebar onChange={setActive} packages={packages} />
+						</Box>
 					</Box>
-					<Box ml={20} w='full'>
+					<Box h='100vh' w='full' overflow={'auto'}>
 						{active ? (
-							<>
+							<Box pt={12} pb={6}>
 								<HStack>
 									<Heading size='lg'>{active.name}</Heading>
 									<Spacer />
@@ -58,11 +59,11 @@ export default function Home({ version, packages }) {
 										devDeps={active.devDependencies || {}}
 									/>
 								</Stack>
-							</>
+							</Box>
 						) : (
-							<>
-								<Heading textAlign={'center'}>Select a package</Heading>
-							</>
+							<Box pt={12}>
+								<Heading>Select a package</Heading>
+							</Box>
 						)}
 					</Box>
 				</Flex>
