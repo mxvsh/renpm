@@ -33,7 +33,7 @@ const ProjectItem = ({ title, description }) => (
 			{title}
 		</Heading>
 		<Text fontSize={'sm'} noOfLines={2}>
-			{description}
+			{description || 'No description found'}
 		</Text>
 	</Box>
 );
@@ -42,11 +42,13 @@ function Sidebar({ packages = [], onChange }) {
 	return (
 		<Stack spacing={4} userSelect={'none'}>
 			<Box h='xs' overflow={'auto'}>
-				{packages.map((pkg, idx) => (
-					<div key={idx} onClick={() => onChange(pkg)}>
-						<ProjectItem title={pkg.name} description={pkg.description} />
-					</div>
-				))}
+				<Stack spacing={4}>
+					{packages.map((pkg, idx) => (
+						<div key={idx} onClick={() => onChange(pkg)}>
+							<ProjectItem title={pkg.name} description={pkg.description} />
+						</div>
+					))}
+				</Stack>
 			</Box>
 			<Divider />
 			<SidebarMenu />
