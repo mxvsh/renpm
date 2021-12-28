@@ -1,8 +1,9 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	Box,
 	chakra,
+	Circle,
 	Divider,
 	Flex,
 	Heading,
@@ -17,11 +18,23 @@ import {
 import Sidebar from '../components/sidebar';
 import Scripts from '../components/scripts';
 import Dependencies from '../components/dependencies';
-
+import { socket } from '../providers/socket.io';
+import { FiAlertCircle } from 'react-icons/fi';
+import Logs from '../components/log';
 const packageJson = require('../package.json');
 
 export default function Home({ version, packages }) {
 	const [active, setActive] = useState(null);
+	const [connectionStatus, setConnectionStatus] = useState(0);
+
+	useEffect(() => {
+		socket.on('connect', () => {
+			setConnectionStatus(1);
+		});
+		socket.on('disconnect', () => {
+			setConnectionStatus(-1);
+		});
+	}, []);
 
 	return (
 		<>
@@ -40,6 +53,12 @@ export default function Home({ version, packages }) {
 						</Box>
 						<Box w='sm'>
 							<Sidebar onChange={setActive} packages={packages} />
+							{connectionStatus === -1 && (
+								<HStack mt={12} textColor={'red.400'}>
+									<FiAlertCircle />
+									<Text>connection lost</Text>
+								</HStack>
+							)}
 						</Box>
 					</Box>
 					<Box h='100vh' w='full' overflow={'auto'}>
@@ -53,11 +72,12 @@ export default function Home({ version, packages }) {
 								<Text>{active.description}</Text>
 								<Divider my={4} />
 								<Stack>
-									<Scripts scripts={active.scripts || {}} />
+									<Scripts name={active.name} scripts={active.scripts || {}} />
 									<Dependencies
 										deps={active.dependencies || {}}
 										devDeps={active.devDependencies || {}}
 									/>
+									<Logs />
 								</Stack>
 							</Box>
 						) : (
