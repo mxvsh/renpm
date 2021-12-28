@@ -6,6 +6,7 @@ const { start } = require('../lib/start');
 const { stop } = require('../lib/stop');
 const { add } = require('../lib/add');
 const { remove } = require('../lib/remove');
+const { update } = require('../lib/update');
 
 const program = new Command();
 program.version(packageJson.version);
@@ -37,6 +38,13 @@ program
 	.description('remove a new npm project')
 	.action((name) => {
 		remove(name);
+	});
+
+program
+	.command('update')
+	.description('update existing npm project')
+	.action((name) => {
+		update(name);
 	});
 
 program.parse(process.argv);
