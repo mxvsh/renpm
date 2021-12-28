@@ -16,8 +16,6 @@ function Scripts({ name, scripts }) {
 	const scriptKeys = useMemo(() => Object.keys(scripts), [scripts]);
 	const [running, setRunning] = useState({});
 
-	const [logs, setLogs] = useState('');
-
 	useEffect(() => {
 		socket.on('log', (msg) => {
 			console.log(msg);
