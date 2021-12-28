@@ -1,5 +1,30 @@
 import React from 'react';
-import { Box, Heading, Stack, Text } from '@chakra-ui/react';
+import { Box, Divider, Heading, HStack, Stack, Text } from '@chakra-ui/react';
+import { FiCoffee, FiSettings } from 'react-icons/fi';
+
+const Options = [
+	['Donate', <FiCoffee key={2} />, '/settings'],
+	['Settings', <FiSettings key={1} />, '/donate'],
+];
+
+const SidebarMenu = () => {
+	return (
+		<Stack>
+			{Options.map(([label, icon], idx) => (
+				<HStack
+					key={idx}
+					p={2}
+					cursor={'pointer'}
+					_hover={{ color: 'red.400', bg: 'red.50' }}
+					transition={'all 0.3s'}
+				>
+					{icon}
+					<Text>{label}</Text>
+				</HStack>
+			))}
+		</Stack>
+	);
+};
 
 const ProjectItem = ({ title, description }) => (
 	<Box cursor={'pointer'}>
@@ -15,11 +40,15 @@ const ProjectItem = ({ title, description }) => (
 function Sidebar({ packages = [], onChange }) {
 	return (
 		<Stack spacing={4} userSelect={'none'}>
-			{packages.map((pkg, idx) => (
-				<div key={idx} onClick={() => onChange(pkg)}>
-					<ProjectItem title={pkg.name} description={pkg.description} />
-				</div>
-			))}
+			<Box h='xs' overflow={'auto'}>
+				{packages.map((pkg, idx) => (
+					<div key={idx} onClick={() => onChange(pkg)}>
+						<ProjectItem title={pkg.name} description={pkg.description} />
+					</div>
+				))}
+			</Box>
+			<Divider />
+			<SidebarMenu />
 		</Stack>
 	);
 }

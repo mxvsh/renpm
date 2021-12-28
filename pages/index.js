@@ -43,7 +43,7 @@ export default function Home({ version, packages }) {
 			</Head>
 
 			<Stack h='100vh' overflow={'hidden'} px={2} maxW='5xl' m='0 auto'>
-				<Flex>
+				<HStack alignItems={'flex-start'} spacing={4}>
 					<Box pt={12}>
 						<Box mb={4}>
 							<Heading color='gray.600'>
@@ -51,7 +51,7 @@ export default function Home({ version, packages }) {
 							</Heading>
 							<Text mb={4}>v{version}</Text>
 						</Box>
-						<Box w='sm'>
+						<Box w='xs'>
 							<Sidebar onChange={setActive} packages={packages} />
 							{connectionStatus === -1 && (
 								<HStack mt={12} textColor={'red.400'}>
@@ -86,7 +86,7 @@ export default function Home({ version, packages }) {
 							</Box>
 						)}
 					</Box>
-				</Flex>
+				</HStack>
 			</Stack>
 		</>
 	);
