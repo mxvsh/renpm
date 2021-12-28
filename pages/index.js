@@ -3,15 +3,14 @@ import { useEffect, useState } from 'react';
 import {
 	Box,
 	chakra,
-	Circle,
 	Divider,
-	Flex,
 	Heading,
 	HStack,
 	Spacer,
 	Stack,
 	Tag,
 	Text,
+	useToast,
 } from '@chakra-ui/react';
 
 // components
@@ -23,8 +22,9 @@ import { FiAlertCircle } from 'react-icons/fi';
 import Logs from '../components/log';
 const packageJson = require('../package.json');
 
-export default function Home({ version, packages }) {
+export default function Home({ version, packages, processes }) {
 	const [active, setActive] = useState(null);
+	const toast = useToast();
 	const [connectionStatus, setConnectionStatus] = useState(0);
 
 	useEffect(() => {
@@ -34,6 +34,17 @@ export default function Home({ version, packages }) {
 		socket.on('disconnect', () => {
 			setConnectionStatus(-1);
 		});
+
+		socket.on('error', (err) => {
+			toast({
+				title: 'Error',
+				description: err.message,
+				status: 'error',
+				position: 'top-right',
+				duration: 3000,
+			});
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -72,12 +83,16 @@ export default function Home({ version, packages }) {
 								<Text>{active.description}</Text>
 								<Divider my={4} />
 								<Stack>
-									<Scripts name={active.name} scripts={active.scripts || {}} />
+									<Scripts
+										processes={processes}
+										name={active.name}
+										scripts={active.scripts || {}}
+									/>
+									<Logs />
 									<Dependencies
 										deps={active.dependencies || {}}
 										devDeps={active.devDependencies || {}}
 									/>
-									<Logs />
 								</Stack>
 							</Box>
 						) : (
@@ -98,6 +113,7 @@ export const getServerSideProps = async () => {
 		props: {
 			version: packageJson.version,
 			packages: config.get('packages'),
+			processes: config.get('processes'),
 		},
 	};
 };
