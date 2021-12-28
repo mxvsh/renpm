@@ -12,8 +12,8 @@ import {
 } from '@chakra-ui/react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-function Card({ children, title, subTitle }) {
-	const [view, setView] = useState(true);
+function Card({ children, title, subTitle, defaultVisible = true }) {
+	const [view, setView] = useState(defaultVisible);
 
 	return (
 		<Box px={4} py={3} bg='gray.50' rounded='md'>

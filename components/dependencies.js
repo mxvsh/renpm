@@ -8,7 +8,11 @@ function Dependencies({ deps, devDeps }) {
 
 	return (
 		<Stack>
-			<Card title='Dependencies' subTitle={'Modules installed in the project'}>
+			<Card
+				title='Dependencies'
+				subTitle={'Modules installed in the project'}
+				defaultVisible={false}
+			>
 				{depsKeys.map((key, index) => (
 					<HStack key={index}>
 						<Text>{key}</Text>
@@ -20,6 +24,7 @@ function Dependencies({ deps, devDeps }) {
 			<Card
 				title='Dev Dependencies'
 				subTitle={'Modules required during development'}
+				defaultVisible={false}
 			>
 				{devDepsKeys.map((key, index) => (
 					<HStack key={index}>
