@@ -1,7 +1,7 @@
 {
 	"name": "renpm",
 	"description": "remote npm script execution",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"license": "MIT",
 	"bin": {
 		"renpm": "bin/cli.js"
