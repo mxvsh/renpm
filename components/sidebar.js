@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Divider, Heading, Stack, Text } from '@chakra-ui/react';
+import { Box, Heading, Stack, Text } from '@chakra-ui/react';
 
 const ProjectItem = ({ title, description }) => (
 	<Box cursor={'pointer'}>
