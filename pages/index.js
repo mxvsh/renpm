@@ -34,7 +34,7 @@ export default function Home({ version, packages }) {
 					<Box pt={12}>
 						<Box>
 							<Heading color='gray.600'>
-								<chakra.span color={'red.400'}>re</chakra.span>npm
+								re<chakra.span color={'red.400'}>npm</chakra.span>
 							</Heading>
 							<Text mb={4}>v{version}</Text>
 						</Box>
