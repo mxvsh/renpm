@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import {
 	Box,
 	Divider,
@@ -12,7 +12,10 @@ import { FiPlay } from 'react-icons/fi';
 import Card from './ui/card';
 
 function Scripts({ scripts }) {
-	const scriptKeys = Object.keys(scripts);
+	const scriptKeys = useMemo(() => Object.keys(scripts), [scripts]);
+	const [running, setRunning] = useState(null);
+	const [logs, setLogs] = useState('');
+
 	return (
 		<Card title='Scripts' subTitle='Execute scripts from the package'>
 			<Stack userSelect={'none'}>

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import {
 	Box,
 	chakra,
@@ -16,7 +17,6 @@ import {
 import Sidebar from '../components/sidebar';
 import Scripts from '../components/scripts';
 import Dependencies from '../components/dependencies';
-import { useState } from 'react';
 
 const packageJson = require('../package.json');
 
@@ -32,7 +32,7 @@ export default function Home({ version, packages }) {
 			<Stack h='100vh' overflow={'hidden'} px={2} maxW='5xl' m='0 auto'>
 				<Flex>
 					<Box pt={12}>
-						<Box>
+						<Box mb={4}>
 							<Heading color='gray.600'>
 								re<chakra.span color={'red.400'}>npm</chakra.span>
 							</Heading>
