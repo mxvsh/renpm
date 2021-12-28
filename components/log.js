@@ -5,11 +5,15 @@ import Card from './ui/card';
 
 function Logs() {
 	const [logs, setLogs] = useState([]);
+
 	useEffect(() => {
 		socket.on('log', (log) => {
-			setLogs((logs) => [...logs, log]);
+			if (typeof log === 'string') {
+				setLogs((prev) => [...prev, log]);
+			}
 		});
 	}, []);
+
 	return (
 		<Card title='Logs' subTitle={'Output from the command'}>
 			{logs.map((log, index) => (
