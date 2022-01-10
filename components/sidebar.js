@@ -14,7 +14,7 @@ const SidebarMenu = () => {
 				<HStack
 					key={idx}
 					p={2}
-					rounded='md'
+					rounded='lg'
 					cursor={'pointer'}
 					_hover={{ color: 'red.400', bg: 'red.50' }}
 					transition={'all 0.3s'}
